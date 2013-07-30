@@ -1,0 +1,36 @@
+--- origsrc/dmenu-4.5/Makefile	2012-01-08 06:18:43.000000000 -0600
++++ src/dmenu-4.5/Makefile	2013-07-29 15:01:17.316220700 -0500
+@@ -16,17 +16,17 @@ options:
+ 
+ .c.o:
+ 	@echo CC -c $<
+-	@${CC} -c $< ${CFLAGS}
++	@${CC} -c $< ${CFLAGS} ${CPPFLAGS}
+ 
+ ${OBJ}: config.mk draw.h
+ 
+ dmenu: dmenu.o draw.o
+ 	@echo CC -o $@
+-	@${CC} -o $@ dmenu.o draw.o ${LDFLAGS}
++	@${CC} -o $@ dmenu.o draw.o ${LDFLAGS} ${LIBS}
+ 
+ stest: stest.o
+ 	@echo CC -o $@
+-	@${CC} -o $@ stest.o ${LDFLAGS}
++	@${CC} -o $@ stest.o ${LDFLAGS} ${LIBS}
+ 
+ clean:
+ 	@echo cleaning
+--- origsrc/dmenu-4.5/config.mk	2012-01-08 06:18:43.000000000 -0600
++++ src/dmenu-4.5/config.mk	2013-07-29 15:01:33.708158300 -0500
+@@ -19,8 +19,8 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS}
+ # flags
+ CPPFLAGS = -D_BSD_SOURCE -D_POSIX_C_SOURCE=2 -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+ #CFLAGS   = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
+-CFLAGS   = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
+-LDFLAGS  = -s ${LIBS}
++CFLAGS   = -std=c99 -pedantic -Wall -Os ${INCS}
++LDFLAGS  = -s
+ 
+ # compiler and linker
+ CC = cc

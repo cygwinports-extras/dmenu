@@ -1,0 +1,21 @@
+NAME="dmenu"
+VERSION=4.5
+RELEASE=1
+CATEGORY="X11"
+SUMMARY="Dynamic menu for dwm"
+DESCRIPTION="dmenu is a dynamic menu for X, originally designed for dwm.
+It manages large numbers of user-defined menu items efficiently."
+HOMEPAGE="http://tools.suckless.org/dmenu/"
+SRC_URI="http://dl.suckless.org/tools/dmenu-${VERSION}.tar.gz"
+PATCH_URI="4.5-cflags.patch"
+
+src_compile() {
+	lndirs
+	cd ${B}
+	cygmake CC=${CC} CFLAGS="${CFLAGS}" LDFLAGS="${LDFLAGS}"
+}
+
+src_install() {
+	cd ${B}
+	cyginstall PREFIX=/usr
+}
